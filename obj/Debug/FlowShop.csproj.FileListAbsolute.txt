@@ -21,3 +21,8 @@ D:\Playground\C#\FlowShop\bin\Debug\Microsoft.Xaml.Behaviors.xml
 D:\Playground\C#\FlowShop\obj\Debug\FlowShop.csproj.CopyComplete
 D:\Playground\C#\FlowShop\bin\Debug\System.ValueTuple.dll
 D:\Playground\C#\FlowShop\bin\Debug\System.ValueTuple.xml
+D:\Playground\C#\FlowShop\obj\Debug\Views\DataProduksiView.baml
+D:\Playground\C#\FlowShop\obj\Debug\Views\DataProduksiView.g.cs
+D:\Playground\C#\FlowShop\obj\Debug\App.baml
+D:\Playground\C#\FlowShop\obj\Debug\Views\AlgoritmaView.g.cs
+D:\Playground\C#\FlowShop\obj\Debug\Views\AlgoritmaView.baml

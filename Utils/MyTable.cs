@@ -29,7 +29,7 @@ namespace FlowShop.Utils
             var value = new List<ProsesModel>();
             await Task.Run(() =>
             {
-                Dispatcher.Invoke(new Action(() =>
+                Dispatcher.BeginInvoke(new Action(() =>
                 {
                     for (int row = 1; row < RowDefinitions.Count; row++)
                     {
@@ -48,11 +48,11 @@ namespace FlowShop.Utils
             });
             return value;
         }
-        public async Task CreateTable()
+        public async Task<bool> CreateTable()
         {
             await Task.Run(() =>
             {
-                Dispatcher.Invoke(new Action(() =>
+                Dispatcher.BeginInvoke(new Action(() =>
                 {
                     for (int i = 0; i <= Row; i++)
                     {
@@ -70,6 +70,7 @@ namespace FlowShop.Utils
                     CreateEntry();
                 }));
             });
+            return true;
         }
         private void CreateHeader()
         {
@@ -102,7 +103,11 @@ namespace FlowShop.Utils
             {
                 for (int col = 1; col < ColumnDefinitions.Count; col++)
                 {
-                    var tb = new TextBox() { VerticalContentAlignment = VerticalAlignment.Center };
+                    var tb = new TextBox()
+                    {
+                        VerticalContentAlignment = VerticalAlignment.Center,
+                        Width = double.NaN
+                    };
                     SetRow(tb, row);
                     SetColumn(tb, col);
                     Children.Add(tb);
