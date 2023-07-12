@@ -76,7 +76,7 @@ namespace FlowShop.ViewModels
         public async void GetJobData()
         {
             Values = CreateDummy();
-            _view.CurrentView = new GenAlgViewModel(Values, 10, 10, 0, 0);
+            _view.CurrentView = new GenAlgViewModel(Values, 10, 10, 0, 0, 0);
         }
         private List<ProsesModel> CreateDummy()
         {

@@ -47,7 +47,7 @@
                 </DockPanel>
                 <DockPanel>
                     <Label Content="Probability (%): "/>
-                    <TextBox HorizontalAlignment="Right"/>
+                    <TextBox HorizontalAlignment="Right" Text="{Binding Probability}"/>
                 </DockPanel>
                 <Button Width="60" 
                     Height="27"

@@ -9,22 +9,23 @@ using System.Threading.Tasks;
 
 namespace FlowShop.ViewModels
 {
-    internal class GenAlgViewModel:BaseViewModel
+    internal class GenAlgViewModel : BaseViewModel
     {
-        public int MutationRate { get; set; }
-        public int CrossoverRate { get; set; }
+        public double MutationRate { get; set; }
+        public double CrossoverRate { get; set; }
         public int JumlahChromosome { get; set; }
         public int JumlahGenerasi { get; set; }
         public int GenerasiSekarang { get; set; }
         public int Probability { get; set; }
         public List<ChromosomeModel> Populasi { get; set; }
         public List<ProsesModel> Data { get; set; }
-        public GenAlgViewModel(List<ProsesModel> data, int jumlahChromosome, int jumlahGenerasi, int mutationRate, int crossoverRate)
+        public GenAlgViewModel(List<ProsesModel> data, int jumlahChromosome, int jumlahGenerasi, int mutationRate, int crossoverRate, int probability)
         {
-            MutationRate = mutationRate;
-            CrossoverRate = crossoverRate;
+            MutationRate = mutationRate / 100;
+            CrossoverRate = crossoverRate / 100;
             JumlahChromosome = jumlahChromosome;
             JumlahGenerasi = jumlahGenerasi;
+            Probability = probability;
             Data = data.GetRange(0, data.Count);
         }
 
