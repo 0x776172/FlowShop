@@ -29,7 +29,7 @@ namespace FlowShop.Utils
             var value = new List<ProsesModel>();
             await Task.Run(() =>
             {
-                Dispatcher.BeginInvoke(new Action(() =>
+                Dispatcher.Invoke(new Action(() =>
                 {
                     for (int row = 1; row < RowDefinitions.Count; row++)
                     {

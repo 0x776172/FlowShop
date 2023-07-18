@@ -15,7 +15,7 @@ namespace FlowShop.ViewModels
 {
     internal class DataProduksiViewModel : BaseViewModel
     {
-        #region Variable
+        #region Fields
         private string _jmlProd = "0";
         private string _jmlMesin = "0";
         private int _jumlahProd = 0;
@@ -24,10 +24,10 @@ namespace FlowShop.ViewModels
         private MyTable _dataGrid;
         private Visibility _showDataGrid = Visibility.Collapsed;
 
-        private NavigationView _view;
+        private NavigationView view;
         #endregion
 
-        #region Property
+        #region Properties
         public string JumlahProduksi
         {
             get => _jmlProd;
@@ -75,8 +75,12 @@ namespace FlowShop.ViewModels
         }
         public async void GetJobData()
         {
-            Values = CreateDummy();
-            _view.CurrentView = new GenAlgViewModel(Values, 10, 10, 0, 0, 0);
+            Values = await Content.GetTableValue();
+            if(Values.Count > 0)
+            {
+                view.CurrentView = new GenAlgViewModel(view, Values);
+
+            }
         }
         private List<ProsesModel> CreateDummy()
         {
@@ -100,7 +104,7 @@ namespace FlowShop.ViewModels
 
         public DataProduksiViewModel(NavigationView view)
         {
-            _view = view;
+            this.view = view;
         }
     }
 }

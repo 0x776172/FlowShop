@@ -1,21 +1,28 @@
 ﻿using FlowShop.Model;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Markup;
 
 namespace FlowShop.Models
 {
-    internal class ChromosomeModel
+    internal class ChromosomeModel : ICloneable
     {
         public ChromosomeModel(List<ProsesModel> jobs)
         {
-            Jobs = jobs.GetRange(0, jobs.Count);
+            Jobs = new List<ProsesModel>();
+            foreach (var job in jobs)
+            {
+
+                Jobs.Add(job.Clone() as ProsesModel);
+            }
         }
         public List<ProsesModel> Jobs { get; set; }
-
-        public async Task<bool> CountDelay()
+        public double Makespan { get; set; }
+        private async Task<bool> CountDelay()
         {
             await Task.Run(() =>
             {
@@ -46,6 +53,45 @@ namespace FlowShop.Models
                 }
             });
             return true;
+        }
+        public async Task CountMakespan()
+        {
+            await CountDelay();
+            await Task.Run(() =>
+            {
+                var makespan = 0.0;
+                var sumOfJob = 0.0;
+                var sumOfDelay = 0.0;
+                foreach (var j in Jobs)
+                {
+                    sumOfJob += j.Durations[j.Durations.Count - 1];
+                    sumOfDelay += j.Delay[j.Delay.Count - 1];
+                    j.Delay.Clear();
+                }
+                makespan = sumOfJob + sumOfDelay;
+                Makespan = makespan;
+
+                Debug.WriteLine($"{sumOfJob} + {sumOfDelay} = {makespan}");
+            });
+        }
+        public override string ToString()
+        {
+            var res = string.Empty;
+            foreach(var i in Jobs)
+            {
+                res += i.Name + ", ";
+            }
+            return res;
+        }
+
+        public object Clone()
+        {
+            var copiedJobs = new List<ProsesModel>();
+            foreach(var j in Jobs)
+            {
+                copiedJobs.Add((ProsesModel)j.Clone());
+            }
+            return new ChromosomeModel(copiedJobs);
         }
     }
 }

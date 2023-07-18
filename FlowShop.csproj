@@ -61,6 +61,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Converters\BoolToVisibility.cs" />
     <Compile Include="Models\ChromosomeModel.cs" />
     <Compile Include="ViewModels\GenAlgViewModel.cs" />
     <Compile Include="Utils\MyTable.cs" />
