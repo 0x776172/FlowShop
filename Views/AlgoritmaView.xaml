@@ -62,7 +62,7 @@
                     <DockPanel>
                         <Label Content="Jumlah Generasi: "
                                HorizontalAlignment="Left"/>
-                        <TextBox HorizontalAlignment="Right" Text="{Binding JumlahGenerasi}"/>
+                        <TextBox HorizontalAlignment="Right" Text="{Binding JumlahGenerasi, Mode=TwoWay}"/>
                     </DockPanel>
                     <DockPanel>
                         <Label Content="Jumlah Chromosome: "
@@ -113,6 +113,13 @@
             <ListBox ItemsSource="{Binding ProsesText}"
                      Height="300"
                      ScrollViewer.VerticalScrollBarVisibility="Auto"/>
+            <Grid Margin="0 5">
+                <ProgressBar Width="70" 
+                             Height="15"
+                             HorizontalAlignment="Left"
+                             Maximum="{Binding JumlahGenerasi}"
+                             Value="{Binding GenerasiSekarang}"/>
+            </Grid>
         </StackPanel>
     </Grid>
 </UserControl>

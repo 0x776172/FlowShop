@@ -76,7 +76,8 @@ namespace FlowShop.ViewModels
         public async void GetJobData()
         {
             Values = await Content.GetTableValue();
-            if(Values.Count > 0)
+            //Values = CreateDummy();
+            if (Values.Count > 0)
             {
                 view.CurrentView = new GenAlgViewModel(view, Values);
 

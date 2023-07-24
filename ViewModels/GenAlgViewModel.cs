@@ -154,6 +154,7 @@ namespace FlowShop.ViewModels
             {
                 for (var gen = 1; gen <= JumlahGenerasi; gen++)
                 {
+                    GenerasiSekarang = gen;
                     string temp = $"Proses generasi ke - {gen}:\n";
                     temp += await DoFitness();
                     temp += Selection();
@@ -262,18 +263,43 @@ namespace FlowShop.ViewModels
             for (var s = start; s <= end; s++)
             {
                 var idx = c1.Jobs.FindIndex(e => e.Name == c2.Jobs[s].Name);
-                if (idx >= start && idx <= end )
+                if (idx >= start && idx <= end)
                 {
                     c1.Jobs[s] = c2.Jobs[s].Clone() as ProsesModel;
                 }
             }
+            CorrectCrossover(c1, c2, start, end);
             return c1;
         }
         private ChromosomeModel CorrectCrossover(ChromosomeModel c, ChromosomeModel c2, int start, int stop)
         {
-            for (var i = start; i <= stop; i++)
+
+            //for (var i = start; i <= stop; i++)
+            //{
+            //    var idx = c.Jobs.FindIndex(e => e.Name == c2.Jobs[i].Name);
+            //}
+            var res = new List<int>();
+            foreach (var i in c2.Jobs)
             {
-                var idx = c.Jobs.FindIndex(e => e.Name == c2.Jobs[i].Name);
+                var cRes = Enumerable.Range(0, c.Jobs.Count).Where(item => c.Jobs[item].Name == i.Name).ToList();
+                if (cRes.Count > 1)
+                {
+                    cRes.ForEach(e =>
+                    {
+                        if (e >= start && e <= stop) res.Add(e);
+                    });
+                }
+            }
+            for (var i = 0; i < res.Count - 1; i++)
+            {
+                foreach(var p in c2.Jobs)
+                {
+                    var idx = c.Jobs.FindIndex(e => e.Name == p.Name);
+                    if (idx < 0)
+                    {
+                        c.Jobs[res[i]] = p.Clone() as ProsesModel;
+                    }
+                }
             }
             return c;
         }
